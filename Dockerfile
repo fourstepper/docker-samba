@@ -1,4 +1,6 @@
-FROM alpine
+ARG TAG=latest
+
+FROM alpine:${TAG}
 LABEL authors="David Personette <dperson@gmail.com>,Robin Opletal <me@robinopletal.com>"
 
 # Install samba

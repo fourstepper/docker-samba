@@ -4,6 +4,12 @@ when:
     - manual
     - cron
 
+matrix:
+  TAG:
+    - "3.17"
+    - "3.18"
+    - latest
+
 steps:
   publish-image-branch:
     image: woodpeckerci/plugin-docker-buildx
@@ -21,7 +27,9 @@ steps:
     settings:
       repo: codeberg.org/${CI_REPO_OWNER}/docker-samba
       registry: codeberg.org
-      tags: latest, ${CI_COMMIT_SHA}
+      tags: ${TAG}
+      build_args:
+        - TAG: ${TAG}
       username: ${CI_REPO_OWNER}
       password:
         from_secret: cb_token

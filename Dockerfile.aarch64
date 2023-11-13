@@ -1,6 +1,7 @@
-FROM arm64v8/alpine
+ARG TAG=latest
+FROM arm64v8/alpine:${TAG}
 COPY qemu-aarch64-static /usr/bin/
-MAINTAINER David Personette <dperson@gmail.com>
+LABEL authors="David Personette <dperson@gmail.com>,Robin Opletal <me@robinopletal.com>"
 
 # Install samba
 RUN apk --no-cache --no-progress upgrade && \
