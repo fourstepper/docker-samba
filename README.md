@@ -1,4 +1,4 @@
-[![logo](https://codeberg.org/fourstepper/docker-samba/src/branch/main/logo.jpg)](https://www.samba.org)
+[![logo](https://codeberg.org/fourstepper/docker-samba/raw/branch/main/logo.jpg)](https://www.samba.org)
 
 # Samba
 
