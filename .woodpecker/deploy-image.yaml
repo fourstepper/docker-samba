@@ -2,6 +2,7 @@ when:
   event:
     - push
     - manual
+    - cron
 
 steps:
   publish-image-branch:

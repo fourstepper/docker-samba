@@ -1,6 +1,8 @@
-[![logo](https://raw.githubusercontent.com/dperson/samba/master/logo.jpg)](https://www.samba.org)
+[![logo](https://codeberg.org/fourstepper/docker-samba/src/branch/main/logo.jpg)](https://www.samba.org)
 
 # Samba
+
+[![status-badge](https://ci.codeberg.org/api/badges/12778/status.svg)](https://ci.codeberg.org/repos/12778)
 
 Samba docker container
 
@@ -16,17 +18,17 @@ By default there are no shares configured, additional ones can be added.
 
 ## Hosting a Samba instance
 
-    sudo docker run -it -p 139:139 -p 445:445 -d dperson/samba -p
+    sudo docker run -it -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p
 
 OR set local storage:
 
     sudo docker run -it --name samba -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d dperson/samba -p
+                -d codeberg.org/fourstepper/docker-samba -p
 
 ## Configuration
 
-    sudo docker run -it --rm dperson/samba -h
+    sudo docker run -it --rm codeberg.org/fourstepper/docker-samba -h
     Usage: samba.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
         -h          This help
@@ -76,22 +78,22 @@ OR set local storage:
 
 ENVIRONMENT VARIABLES
 
- * `CHARMAP` - As above, configure character mapping
- * `GENERIC` - As above, configure a generic section option (See NOTE3 below)
- * `GLOBAL` - As above, configure a global option (See NOTE3 below)
- * `IMPORT` - As above, import a smbpassword file
- * `NMBD` - As above, enable nmbd
- * `PERMISSIONS` - As above, set file permissions on all shares
- * `RECYCLE` - As above, disable recycle bin
- * `SHARE` - As above, setup a share (See NOTE3 below)
- * `SMB` - As above, disable SMB2 minimum version
- * `TZ` - Set a timezone, IE `EST5EDT`
- * `USER` - As above, setup a user (See NOTE3 below)
- * `WIDELINKS` - As above, allow access wide symbolic links
- * `WORKGROUP` - As above, set workgroup
- * `USERID` - Set the UID for the samba server's default user (smbuser)
- * `GROUPID` - Set the GID for the samba server's default user (smbuser)
- * `INCLUDE` - As above, add a smb.conf include
+- `CHARMAP` - As above, configure character mapping
+- `GENERIC` - As above, configure a generic section option (See NOTE3 below)
+- `GLOBAL` - As above, configure a global option (See NOTE3 below)
+- `IMPORT` - As above, import a smbpassword file
+- `NMBD` - As above, enable nmbd
+- `PERMISSIONS` - As above, set file permissions on all shares
+- `RECYCLE` - As above, disable recycle bin
+- `SHARE` - As above, setup a share (See NOTE3 below)
+- `SMB` - As above, disable SMB2 minimum version
+- `TZ` - Set a timezone, IE `EST5EDT`
+- `USER` - As above, setup a user (See NOTE3 below)
+- `WIDELINKS` - As above, allow access wide symbolic links
+- `WORKGROUP` - As above, set workgroup
+- `USERID` - Set the UID for the samba server's default user (smbuser)
+- `GROUPID` - Set the GID for the samba server's default user (smbuser)
+- `INCLUDE` - As above, add a smb.conf include
 
 **NOTE**: if you enable nmbd (via `-n` or the `NMBD` environment variable), you
 will also want to expose port 137 and 138 with `-p 137:137/udp -p 138:138/udp`.
@@ -109,11 +111,11 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ### Setting the Timezone
 
-    sudo docker run -it -e TZ=EST5EDT -p 139:139 -p 445:445 -d dperson/samba -p
+    sudo docker run -it -e TZ=EST5EDT -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p
 
 ### Start an instance creating users and shares:
 
-    sudo docker run -it -p 139:139 -p 445:445 -d dperson/samba -p \
+    sudo docker run -it -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p \
                 -u "example1;badpass" \
                 -u "example2;badpass" \
                 -s "public;/share" \
@@ -125,38 +127,38 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ## Troubleshooting
 
-* You get the error `Access is denied` (or similar) on the client and/or see
-`change_to_user_internal: chdir_current_service() failed!` in the container
-logs.
+- You get the error `Access is denied` (or similar) on the client and/or see
+  `change_to_user_internal: chdir_current_service() failed!` in the container
+  logs.
 
 Add the `-p` option to the end of your options to the container, or set the
 `PERMISSIONS` environment variable.
 
     sudo docker run -it --name samba -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d dperson/samba -p
+                -d codeberg.org/fourstepper/docker-samba -p
 
 If changing the permissions of your files is not possible in your setup you
 can instead set the environment variables `USERID` and `GROUPID` to the
 values of the owner of your files.
 
-* High memory usage by samba. Multiple people have reported high memory usage
-that's never freed by the samba processes. Recommended work around below:
+- High memory usage by samba. Multiple people have reported high memory usage
+  that's never freed by the samba processes. Recommended work around below:
 
 Add the `-m 512m` option to docker run command, or `mem_limit:` in
 docker_compose.yml files, IE:
 
     sudo docker run -it --name samba -m 512m -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d dperson/samba -p
+                -d codeberg.org/fourstepper/docker-samba -p
 
-* Attempting to connect with the `smbclient` commandline tool. By default samba
-still tries to use SMB1, which is depriciated and has security issues. This
-container defaults to SMB2, which for no decernable reason even though it's
-supported is disabled by default so run the command as `smbclient -m SMB3`, then
-any other options you would specify.
+- Attempting to connect with the `smbclient` commandline tool. By default samba
+  still tries to use SMB1, which is depriciated and has security issues. This
+  container defaults to SMB2, which for no decernable reason even though it's
+  supported is disabled by default so run the command as `smbclient -m SMB3`, then
+  any other options you would specify.
 
 ## Issues
 
 If you have any problems with or questions about this image, please contact me
-through a [GitHub issue](https://github.com/dperson/samba/issues).
+through a [Codeberg Issue](https://codeberg.org/fourstepper/docker-samba/issues).
