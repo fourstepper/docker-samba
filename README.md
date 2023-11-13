@@ -12,7 +12,17 @@ Since 1992, Samba has provided secure, stable and fast file and print services
 for all clients using the SMB/CIFS protocol, such as all versions of DOS and
 Windows, OS/2, Linux and many others.
 
-# How to use this image
+## Image versions
+
+I maintain three image versions of this image:
+
+- `codeberg.org/fourstepper/docker-samba` (basically, `codeberg.org/fourstepper/docker-samba:latest`)
+- `codeberg.org/fourstepper/docker-samba:<stable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.18` as of November, 2023)
+- `codeberg.org/fourstepper/docker-samba:<oldstable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.17` as of November, 2023)
+
+If you don't see the new version, don't hesitate to let me know in the [Codeberg issues](https://codeberg.org/fourstepper/docker-samba/issues).
+
+## How to use this image
 
 By default there are no shares configured, additional ones can be added.
 
