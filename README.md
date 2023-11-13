@@ -20,7 +20,7 @@ I maintain three image versions of this image:
 - `codeberg.org/fourstepper/docker-samba:<stable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.18` as of November, 2023)
 - `codeberg.org/fourstepper/docker-samba:<oldstable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.17` as of November, 2023)
 
-If you don't see the new version, don't hesitate to let me know in the [Codeberg issues](https://codeberg.org/fourstepper/docker-samba/issues).
+If you don't see the new version [in the packages](https://codeberg.org/fourstepper/-/packages/container/docker-samba/versions), don't hesitate to let me know in the [Codeberg issues](https://codeberg.org/fourstepper/docker-samba/issues).
 
 ## How to use this image
 
