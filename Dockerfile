@@ -1,5 +1,4 @@
-ARG TAG=latest
-
+ARG TAG
 FROM alpine:${TAG}
 LABEL authors="David Personette <dperson@gmail.com>,Robin Opletal <me@robinopletal.com>"
 

@@ -3,35 +3,23 @@ when:
     - push
     - manual
     - cron
+  evaluate: CI_COMMIT_BRANCH == CI_REPO_DEFAULT_BRANCH
 
 matrix:
   TAG:
-    - "3.17"
-    - "3.18"
+    - 3.17
+    - 3.18
     - latest
 
 steps:
-  publish-image-branch:
-    image: woodpeckerci/plugin-docker-buildx
-    settings:
-      repo: codeberg.org/${CI_REPO_OWNER}/docker-samba
-      registry: codeberg.org
-      username: ${CI_REPO_OWNER}
-      password:
-        from_secret: cb_token
-    when:
-      evaluate: CI_COMMIT_BRANCH != CI_REPO_DEFAULT_BRANCH
-
-  publish-image-latest:
+  publish-image:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: codeberg.org/${CI_REPO_OWNER}/docker-samba
       registry: codeberg.org
       tags: ${TAG}
       build_args:
-        - TAG: ${TAG}
+        - TAG=${TAG}
       username: ${CI_REPO_OWNER}
       password:
         from_secret: cb_token
-    when:
-      evaluate: CI_COMMIT_BRANCH == CI_REPO_DEFAULT_BRANCH

@@ -3,9 +3,10 @@ when:
     - push
     - manual
     - cron
+  evaluate: CI_COMMIT_BRANCH != CI_REPO_DEFAULT_BRANCH
 
 steps:
-  publish-image-branch:
+  publish-image:
     image: woodpeckerci/plugin-docker-buildx
     settings:
       repo: codeberg.org/${CI_REPO_OWNER}/docker-samba
@@ -13,5 +14,3 @@ steps:
       username: ${CI_REPO_OWNER}
       password:
         from_secret: cb_token
-    when:
-      evaluate: CI_COMMIT_BRANCH != CI_REPO_DEFAULT_BRANCH

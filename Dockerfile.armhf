@@ -1,5 +1,4 @@
-ARG TAG=latest
-
+ARG TAG
 FROM arm32v6/alpine:${TAG}
 COPY qemu-arm-static /usr/bin/
 LABEL authors="David Personette <dperson@gmail.com>,Robin Opletal <me@robinopletal.com>"
