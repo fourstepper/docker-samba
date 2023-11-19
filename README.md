@@ -1,8 +1,8 @@
-[![logo](https://codeberg.org/fourstepper/docker-samba/raw/branch/main/logo.jpg)](https://www.samba.org)
+[![logo](https://github.com/fourstepper/docker-samba/blob/main/logo.jpg?raw=true)](https://www.samba.org)
 
 # Samba
 
-[![status-badge](https://ci.codeberg.org/api/badges/12778/status.svg)](https://ci.codeberg.org/repos/12778)
+[![Create and publish the Docker image](https://github.com/fourstepper/docker-samba/actions/workflows/publish-image.yaml/badge.svg)](https://github.com/fourstepper/docker-samba/actions/workflows/publish-image.yaml)
 
 Samba docker container
 
@@ -16,11 +16,11 @@ Windows, OS/2, Linux and many others.
 
 I maintain three image versions of this image:
 
-- `codeberg.org/fourstepper/docker-samba` (basically, `codeberg.org/fourstepper/docker-samba:latest`)
-- `codeberg.org/fourstepper/docker-samba:<stable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.18` as of November, 2023)
-- `codeberg.org/fourstepper/docker-samba:<oldstable_alpine_version>` (for example `codeberg.org/fourstepper/docker-samba:3.17` as of November, 2023)
+- `ghcr.io/fourstepper/docker-samba` (basically, `ghcr.io/fourstepper/docker-samba:latest`)
+- `ghcr.io/fourstepper/docker-samba:<stable_alpine_version>` (for example `ghcr.io/fourstepper/docker-samba:3.18` as of November, 2023)
+- `ghcr.io/fourstepper/docker-samba:<oldstable_alpine_version>` (for example `ghcr.io/fourstepper/docker-samba:3.17` as of November, 2023)
 
-If you don't see the new version [in the packages](https://codeberg.org/fourstepper/-/packages/container/docker-samba/versions), don't hesitate to let me know in the [Codeberg issues](https://codeberg.org/fourstepper/docker-samba/issues).
+If you don't see the new version [in the packages](https://github.com/fourstepper/docker-samba/pkgs/container/docker-samba), don't hesitate to let me know in the [issues](https://github.com/fourstepper/docker-samba/issues).
 
 ## How to use this image
 
@@ -28,17 +28,17 @@ By default there are no shares configured, additional ones can be added.
 
 ## Hosting a Samba instance
 
-    sudo docker run -it -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p
+    sudo docker run -it -p 139:139 -p 445:445 -d ghcr.io/fourstepper/docker-samba -p
 
 OR set local storage:
 
     sudo docker run -it --name samba -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d codeberg.org/fourstepper/docker-samba -p
+                -d ghcr.io/fourstepper/docker-samba -p
 
 ## Configuration
 
-    sudo docker run -it --rm codeberg.org/fourstepper/docker-samba -h
+    sudo docker run -it --rm ghcr.io/fourstepper/docker-samba -h
     Usage: samba.sh [-opt] [command]
     Options (fields in '[]' are optional, '<>' are required):
         -h          This help
@@ -121,11 +121,11 @@ Any of the commands can be run at creation with `docker run` or later with
 
 ### Setting the Timezone
 
-    sudo docker run -it -e TZ=EST5EDT -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p
+    sudo docker run -it -e TZ=EST5EDT -p 139:139 -p 445:445 -d ghcr.io/fourstepper/docker-samba -p
 
 ### Start an instance creating users and shares:
 
-    sudo docker run -it -p 139:139 -p 445:445 -d codeberg.org/fourstepper/docker-samba -p \
+    sudo docker run -it -p 139:139 -p 445:445 -d ghcr.io/fourstepper/docker-samba -p \
                 -u "example1;badpass" \
                 -u "example2;badpass" \
                 -s "public;/share" \
@@ -146,7 +146,7 @@ Add the `-p` option to the end of your options to the container, or set the
 
     sudo docker run -it --name samba -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d codeberg.org/fourstepper/docker-samba -p
+                -d ghcr.io/fourstepper/docker-samba -p
 
 If changing the permissions of your files is not possible in your setup you
 can instead set the environment variables `USERID` and `GROUPID` to the
@@ -160,15 +160,10 @@ docker_compose.yml files, IE:
 
     sudo docker run -it --name samba -m 512m -p 139:139 -p 445:445 \
                 -v /path/to/directory:/mount \
-                -d codeberg.org/fourstepper/docker-samba -p
+                -d ghcr.io/fourstepper/docker-samba -p
 
 - Attempting to connect with the `smbclient` commandline tool. By default samba
   still tries to use SMB1, which is depriciated and has security issues. This
   container defaults to SMB2, which for no decernable reason even though it's
   supported is disabled by default so run the command as `smbclient -m SMB3`, then
   any other options you would specify.
-
-## Issues
-
-If you have any problems with or questions about this image, please contact me
-through a [Codeberg Issue](https://codeberg.org/fourstepper/docker-samba/issues).
